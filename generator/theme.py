@@ -1,19 +1,23 @@
+DS_UID = "afrgzfertlt6ob"
+
 COLORS = {
-    "background": "#0B1017",
-    "card": "#161D29",
-    "card_alt": "#101827",
-    "border": "#283447",
-    "accent": "#00B8FF",
-    "success": "#00E676",
-    "warning": "#FFC107",
-    "critical": "#FF4D4F",
-    "text": "#E5F0FF",
-    "muted": "#8FA3BF",
+    "bg": "#0B1017",
+    "panel": "#111820",
+    "panel_alt": "#151D29",
+    "border": "#263245",
+    "blue": "#00B8FF",
+    "green": "#00E676",
+    "yellow": "#FFC107",
+    "orange": "#FF8A3D",
+    "red": "#FF4D4F",
+    "purple": "#9B5CFF",
+    "text": "#E8F1FF",
+    "muted": "#8EA0B8",
 }
 
-GRID = {
-    "columns": 24,
-    "header_h": 3,
-    "card_h": 4,
-    "graph_h": 8,
+DASHBOARD = {
+    "title": "ENIGMATIZE COMMAND CENTER",
+    "uid": "enigmatize-home-v2",
+    "schema_version": 41,
+    "refresh": "5s",
 }

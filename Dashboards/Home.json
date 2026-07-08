@@ -1,152 +1,149 @@
 {
   "title": "ENIGMATIZE COMMAND CENTER",
+  "uid": "enigmatize-home-v2",
   "schemaVersion": 41,
-  "version": 1,
+  "version": 5,
   "refresh": "5s",
   "time": {
     "from": "now-1h",
     "to": "now"
   },
+  "timezone": "browser",
+  "tags": [
+    "enigmatize",
+    "home-noc"
+  ],
   "panels": [
     {
       "id": 1,
-      "type": "stat",
-      "title": "\ud83c\udf10 Cloudflare",
+      "type": "text",
+      "title": "",
       "gridPos": {
         "x": 0,
         "y": 0,
-        "w": 6,
-        "h": 4
+        "w": 4,
+        "h": 30
       },
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "expr": "probe_duration_seconds{instance=\"1.1.1.1\"} * 1000"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 50
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "transparent": false,
       "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ]
-        },
-        "orientation": "auto",
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center"
+        "mode": "markdown",
+        "content": "## \u26a1 ENIGMATIZE\n### COMMAND CENTER\n\n---\n\n\ud83c\udfe0 **HOME**\n\n\ud83d\udda5 Gaming PC\n\n\ud83c\udf10 Internet\n\n\ud83d\udce1 XR500 Router\n\n\ud83c\udfae Gaming Services\n\n\ud83d\udea8 Alerts\n\n\ud83d\udcc8 History\n\n\u2699 Settings\n\n---\n\n\ud83d\udccd Melbourne, FL\n\n\u23f1 Refresh: 5s"
       }
     },
     {
       "id": 2,
-      "type": "stat",
-      "title": "\ud83c\udf0d Google",
+      "type": "text",
+      "title": "",
       "gridPos": {
-        "x": 6,
+        "x": 4,
         "y": 0,
-        "w": 6,
-        "h": 4
+        "w": 14,
+        "h": 3
       },
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "targets": [
-        {
-          "refId": "A",
-          "expr": "probe_duration_seconds{instance=\"8.8.8.8\"} * 1000"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 50
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "transparent": true,
       "options": {
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ]
-        },
-        "orientation": "auto",
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center"
+        "mode": "markdown",
+        "content": "# \u26a1 ENIGMATIZE COMMAND CENTER\n### XR500 \u2022 Spectrum Gig \u2022 Gaming Network \u2022 Live Monitoring"
       }
     },
     {
       "id": 3,
       "type": "stat",
-      "title": "\ud83d\udd37 Quad9",
+      "title": "\ud83d\udfe2 Network Status",
       "gridPos": {
-        "x": 12,
+        "x": 18,
         "y": 0,
         "w": 6,
-        "h": 4
+        "h": 3
       },
       "datasource": {
         "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
+        "uid": "afrgzfertlt6ob"
       },
       "targets": [
         {
           "refId": "A",
-          "expr": "probe_duration_seconds{instance=\"9.9.9.9\"} * 1000"
+          "expr": "avg(probe_success{job=\"blackbox\", instance=~\"1.1.1.1|8.8.8.8|9.9.9.9\"}) * 100",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
         }
       ],
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 99
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "\ud83c\udf10 Cloudflare",
+      "gridPos": {
+        "x": 4,
+        "y": 3,
+        "w": 5,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "probe_duration_seconds{instance=\"1.1.1.1\"} * 1000",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
           "color": {
             "mode": "thresholds"
           },
@@ -159,11 +156,11 @@
               },
               {
                 "color": "yellow",
-                "value": 50
+                "value": 30
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 60
               }
             ]
           }
@@ -172,14 +169,801 @@
       },
       "options": {
         "reduceOptions": {
+          "values": false,
           "calcs": [
             "lastNotNull"
-          ]
+          ],
+          "fields": ""
         },
         "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
         "colorMode": "background",
         "graphMode": "area",
-        "justifyMode": "center"
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "\ud83c\udf0d Google",
+      "gridPos": {
+        "x": 9,
+        "y": 3,
+        "w": 5,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "probe_duration_seconds{instance=\"8.8.8.8\"} * 1000",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 30
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "\ud83d\udd37 Quad9",
+      "gridPos": {
+        "x": 14,
+        "y": 3,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "probe_duration_seconds{instance=\"9.9.9.9\"} * 1000",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 30
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 7,
+      "type": "stat",
+      "title": "\ud83c\udfae Gaming Ready",
+      "gridPos": {
+        "x": 18,
+        "y": 3,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "avg(probe_success{job=\"blackbox\", instance=~\"1.1.1.1|8.8.8.8|9.9.9.9\"}) * 100",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 99
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "\ud83d\udcc8 Live Internet Latency",
+      "gridPos": {
+        "x": 0,
+        "y": 7,
+        "w": 18,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "probe_duration_seconds{instance=\"1.1.1.1\"} * 1000",
+          "legendFormat": "Cloudflare",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        },
+        {
+          "refId": "B",
+          "expr": "probe_duration_seconds{instance=\"8.8.8.8\"} * 1000",
+          "legendFormat": "Google",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        },
+        {
+          "refId": "C",
+          "expr": "probe_duration_seconds{instance=\"9.9.9.9\"} * 1000",
+          "legendFormat": "Quad9",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "type": "text",
+      "title": "\ud83d\udce1 XR500 Router",
+      "gridPos": {
+        "x": 18,
+        "y": 7,
+        "w": 6,
+        "h": 8
+      },
+      "transparent": false,
+      "options": {
+        "mode": "markdown",
+        "content": "### XR500 ROUTER\n\n\ud83d\udfe2 WAN Status: Online\n\n\u2b07\ufe0f Live Download: See Network Traffic panel\n\n\u2b06\ufe0f Live Upload: See Network Traffic panel\n\n\ud83d\udc65 Connected Devices: Pending\n\n\ud83d\udce1 Router Ping: Pending"
+      }
+    },
+    {
+      "id": 10,
+      "type": "stat",
+      "title": "\ud83e\udde0 CPU",
+      "gridPos": {
+        "x": 4,
+        "y": 15,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 - (avg(rate(windows_cpu_time_total{job=\"windows\",mode=\"idle\"}[2m])) * 100)",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 11,
+      "type": "stat",
+      "title": "\ud83e\uddec RAM",
+      "gridPos": {
+        "x": 8,
+        "y": 15,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 * (1 - (windows_os_physical_memory_free_bytes{job=\"windows\"} / windows_cs_physical_memory_bytes{job=\"windows\"}))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 75
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 12,
+      "type": "stat",
+      "title": "\ud83d\udcbe Disk C:",
+      "gridPos": {
+        "x": 12,
+        "y": 15,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 * (1 - (windows_logical_disk_free_bytes{job=\"windows\",volume=\"C:\"} / windows_logical_disk_size_bytes{job=\"windows\",volume=\"C:\"}))",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 13,
+      "type": "stat",
+      "title": "\u2b07\ufe0f Download",
+      "gridPos": {
+        "x": 16,
+        "y": 15,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(windows_net_bytes_received_total{job=\"windows\",nic!~\"isatap.*|Teredo.*|Loopback.*\"}[1m])) * 8",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 100000000
+              },
+              {
+                "color": "red",
+                "value": 500000000
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 14,
+      "type": "stat",
+      "title": "\ud83d\udea8 Packet Loss",
+      "gridPos": {
+        "x": 20,
+        "y": 15,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "avg(1 - probe_success{job=\"blackbox\", instance=~\"1.1.1.1|8.8.8.8|9.9.9.9\"}) * 100",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "orientation": "auto",
+        "textMode": "auto",
+        "wideLayout": true,
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "showPercentChange": false
+      }
+    },
+    {
+      "id": 15,
+      "type": "timeseries",
+      "title": "\ud83d\udcca Gaming PC Network Traffic",
+      "gridPos": {
+        "x": 0,
+        "y": 19,
+        "w": 12,
+        "h": 6
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(rate(windows_net_bytes_received_total{job=\"windows\",nic!~\"isatap.*|Teredo.*|Loopback.*\"}[1m])) * 8",
+          "legendFormat": "Download",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        },
+        {
+          "refId": "B",
+          "expr": "sum(rate(windows_net_bytes_sent_total{job=\"windows\",nic!~\"isatap.*|Teredo.*|Loopback.*\"}[1m])) * 8",
+          "legendFormat": "Upload",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "decimals": 1
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "type": "timeseries",
+      "title": "\ud83d\udda5 Gaming PC Health",
+      "gridPos": {
+        "x": 12,
+        "y": 19,
+        "w": 12,
+        "h": 6
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "afrgzfertlt6ob"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "100 - (avg(rate(windows_cpu_time_total{job=\"windows\",mode=\"idle\"}[2m])) * 100)",
+          "legendFormat": "CPU",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        },
+        {
+          "refId": "B",
+          "expr": "100 * (1 - (windows_os_physical_memory_free_bytes{job=\"windows\"} / windows_cs_physical_memory_bytes{job=\"windows\"}))",
+          "legendFormat": "RAM",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        },
+        {
+          "refId": "C",
+          "expr": "100 * (1 - (windows_logical_disk_free_bytes{job=\"windows\",volume=\"C:\"} / windows_logical_disk_size_bytes{job=\"windows\",volume=\"C:\"}))",
+          "legendFormat": "Disk C",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "afrgzfertlt6ob"
+          },
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "decimals": 1
+        },
+        "overrides": []
+      },
+      "options": {
+        "tooltip": {
+          "mode": "multi"
+        },
+        "legend": {
+          "showLegend": true,
+          "displayMode": "table",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "type": "text",
+      "title": "\ud83c\udfae Gaming Services",
+      "gridPos": {
+        "x": 4,
+        "y": 25,
+        "w": 12,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "mode": "markdown",
+        "content": "### GAMING SERVICES\n\n\ud83d\udfe2 Discord  \n\ud83d\udfe2 Steam  \n\ud83d\udfe2 Epic Games  \n\ud83d\udfe2 Battle.net  \n\ud83d\udfe2 Marathon  \n\ud83d\udfe2 Xbox Live"
+      }
+    },
+    {
+      "id": 18,
+      "type": "text",
+      "title": "\ud83d\udea8 Alert Center",
+      "gridPos": {
+        "x": 16,
+        "y": 25,
+        "w": 8,
+        "h": 5
+      },
+      "transparent": false,
+      "options": {
+        "mode": "markdown",
+        "content": "### No Active Alerts\n\n\u2705 All monitored systems normal."
       }
     }
   ]
